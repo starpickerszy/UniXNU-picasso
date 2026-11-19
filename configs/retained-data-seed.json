@@ -1,12 +1,12 @@
 {
   "schema": "picasso-retained-seed-v1",
-  "repository": "YinCQL/UniXNU-picasso",
-  "tag": "picasso-data-seed-72443f51",
-  "asset": "picasso-data-seed-72443f51.zip",
-  "bytes": 1177534,
-  "sha256": "f61e92ba762e481d84abdcf4d8f391b08d2e4b03f8bbeab40eb92df923b99eec",
+  "repository": "starpickerszy/UniXNU-picasso",
+  "tag": "picasso-data-seed-219442c4-v1",
+  "asset": "picasso-data-seed-219442c4.zip",
+  "bytes": 1268847,
+  "sha256": "1f191f094794e578edf65d867753dd771d586ae8537f1d04d59115e919d1614e",
   "recipe_sha256": "b5fc7d559c3ab0dd1c7fee9fe46674b50457772c63321f01ace72498de5a2832",
-  "volume_uuid": "72443F51-21DE-49BF-AA5A-BDBFEEA830ED",
+  "volume_uuid": "219442C4-8B1A-4910-BCF4-55C21B647AD3",
   "original_producer": {
     "schema": "picasso-ios16-linux-inputs-v1",
     "repository": "YinCQL/UniXNU-picasso",
