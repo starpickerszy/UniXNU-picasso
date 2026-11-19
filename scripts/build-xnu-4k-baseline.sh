@@ -102,12 +102,7 @@ if [ "$NOVATEK_TOUCH" != 0 ] && [ "$NOVATEK_TOUCH" != 1 ]; then
   exit 1
 fi
 if [ "$NOVATEK_TOUCH" = 1 ]; then
-  if [ "$BOOT_PROGRESS" != 1 ] && [ "$BOOTSTRAP" != 1 ]; then
-    echo 'NativeNovatekTouch needs the boot-progress build: its probe call site lives in BootProgress.c' >&2
-    exit 1
-  fi
-  # NOVATEK_TOUCH_FW points at a bare Novatek image (or one of the 0x22000 arrays
-  # carved from the stock kernel; the probe skips that trailer itself).
+  # PicassoHidInput.cpp calls native_novatek_touch_probe() once its digitizer sink is ready.
   if [ "$BOOTSTRAP" = 0 ]; then python3 scripts/build-native-novatek-touch.py ${NOVATEK_TOUCH_FW:+--firmware "$NOVATEK_TOUCH_FW"}; fi
 fi
 PICASSO_CPUFREQ=${XNU_PICASSO_CPUFREQ:-0}
