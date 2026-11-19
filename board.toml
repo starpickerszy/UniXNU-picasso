@@ -300,8 +300,7 @@ kernel_args = [
   "picasso-aks-state=1",
   # Software refresh notifications only; panel timing remains firmware-owned.
   "sheng-vsync=60",
-  # Boot monitor hosts the Novatek probe call site; mode 2 keeps the OS running.
-  "boot-progress=2",
+
   # Virtual input: after HID and two frames are ready, wake at 5 s and swipe at 8 s.
   # Repeat at 60 s intervals, up to eight attempts; failure releases the contact.
   "offline-hid-input=1",
