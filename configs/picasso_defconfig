@@ -61,7 +61,7 @@ CONFIG_XNU_OWNER_CACHE_VOLUME_UUID="96096B28-B6DC-4BC7-9D3A-2632A0FE53F1"
 # CONFIG_XNU_OWNER_CACHE_CARRIER is not set
 CONFIG_XNU_OWNER_DATA_MOUNT=y
 CONFIG_XNU_OWNER_UNION_SYSTEMOS=y
-CONFIG_XNU_BOOT_PROGRESS=y
+# CONFIG_XNU_BOOT_PROGRESS is not set
 
 # prepare-picasso-ram-data.py writes the formatted APFS volume's actual UUID
 # into out/picasso/.config before compilation. An unprepared build must fail.
