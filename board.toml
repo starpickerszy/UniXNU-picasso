@@ -317,11 +317,10 @@ kernel_args = [
   "sheng-touch-hid=1",
   # Start the firmware-backed physical panel once the digitizer sink exists.
   "sheng-touch=4",
-  # The synthetic bottom-edge swipe that unlocks this iPad identity; auto-home did
-  # not leave the lock screen. One gesture every 20 s from t=540 s covers the window
-  # in which SpringBoard takes the panel.
-  "offline-hid-start=540",
-  "offline-hid-swipe=16",
+  # Synthetic swipe demonstration (offline-hid-start/swipe) removed: it produced
+  # fake Home/swipe events that masked the real Novatek panel state and pushed
+  # the kernel command line to 1012 bytes (limit 1000). Real touch is driven by
+  # sheng-touch=4 + sheng-touch-hid=1 against the physical NT36672C panel.
 ]
 # Stage-5 blind-spot instrumentation (docs/zh/guide/debugging.md 颜色条):
 # scripts/patch-xnu-entry-probe.py (ported from UniXNU-sheng; it adapts itself
