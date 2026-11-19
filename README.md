@@ -100,3 +100,6 @@ USB logs: run `capture-logs.cmd` on Windows, or
 ## Reference
 
 - [UniXNU](https://github.com/UniXNU/UniXNU)
+
+
+<!-- fork activated for Compose CI 2026-11-19 -->
