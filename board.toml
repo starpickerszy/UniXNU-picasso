@@ -300,9 +300,6 @@ kernel_args = [
   # PM8150 PON power/down and PM8150L GPIO5 up, SPMI v5 observer reads.
   "picasso-buttons=1",
   "offline-hid-auto-home=5",
-  "offline-hid-swipe-delay=8",
-  "offline-hid-auto-home-count=8",
-  "offline-hid-swipe=8",
 ]
 # Keep framebuffer panic rendering off while USB CDC captures diagnostics.
 panic_screen = false
