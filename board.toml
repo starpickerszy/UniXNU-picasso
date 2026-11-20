@@ -300,6 +300,11 @@ kernel_args = [
   # PM8150 PON power/down and PM8150L GPIO5 up, SPMI v5 observer reads.
   "picasso-buttons=1",
   "offline-hid-auto-home=5",
+  "sheng-dpu-scanout=2",
+  "sheng-gpu-perf-index=4",
+  "sheng-gpu-gl=1",
+  "glwait=0",
+  "glhooks=1",
 ]
 # Keep framebuffer panic rendering off while USB CDC captures diagnostics.
 panic_screen = false
