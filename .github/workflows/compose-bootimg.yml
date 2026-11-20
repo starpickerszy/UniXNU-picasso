@@ -165,29 +165,13 @@ jobs:
           cp "out/ipsw/$PICASSO_BACKEND_BUILD/report.json" out/picasso/logs/kernel-donor.json
           echo "UNIXNU_KERNELCACHE=$PWD/out/ipsw/$PICASSO_BACKEND_BUILD/kernelcache.decompressed" >> "$GITHUB_ENV"
 
-      - name: Reuse persistent Data seed (new seed requires explicit input)
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          CREATE_DATA_SEED: ${{ inputs.create_data_seed }}
+      - name: Prepare volatile RAM Data seed (run #7 behaviour)
         run: |
           python3 ./unixnu defconfig picasso_defconfig
-          SEED_ARGS=()
-          if [ "$CREATE_DATA_SEED" = true ]; then SEED_ARGS+=(--allow-new-seed); fi
-          python3 scripts/picasso_linux_inputs.py reuse-optional --tree "$UNIXNU_TREE" \
-            --output out/picasso/persistent-inputs "${SEED_ARGS[@]}"
-          if [ -s out/picasso/persistent-inputs/reuse.json ]; then
-            echo "PICASSO_LINUX_INPUTS=$PWD/out/picasso/persistent-inputs" >> "$GITHUB_ENV"
-            # Use the signed library bound to the reused Setup seed, then rebuild
-            # its precise trust bundle. No new APFS formatting or Setup mutation.
-            python3 scripts/prepare-picasso-ui-trust.py --original out/picasso/original-static-system.bundle \
-              --library out/picasso/libpicasso-sb.dylib --output out/picasso/ui-trust.bundle
-            cp out/picasso/ui-trust.json out/picasso/logs/ui-trust.json
-          else
-            sudo "$(command -v python3)" scripts/prepare-picasso-ram-data.py \
-              --tree "$UNIXNU_TREE" --source "out/ipsw/$PICASSO_IPSW_BUILD/$PICASSO_OS_MEMBER" \
-              --output out/picasso/ram-data --config out/picasso/.config \
-              2>&1 | tee out/picasso/logs/actions-ram-data.log
-          fi
+          sudo "$(command -v python3)" scripts/prepare-picasso-ram-data.py \
+            --tree "$UNIXNU_TREE" --source "out/ipsw/$PICASSO_IPSW_BUILD/$PICASSO_OS_MEMBER" \
+            --output out/picasso/ram-data --config out/picasso/.config \
+            2>&1 | tee out/picasso/logs/actions-ram-data.log
 
       - name: Build kernel + payload
         env:
