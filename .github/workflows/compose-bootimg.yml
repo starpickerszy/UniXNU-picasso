@@ -173,6 +173,27 @@ jobs:
             --output out/picasso/ram-data --config out/picasso/.config \
             2>&1 | tee out/picasso/logs/actions-ram-data.log
 
+      - name: Force ephemeral-storage ADT property (RAM Data, run #7 behaviour)
+        run: |
+          ADT="$UNIXNU_TREE/scripts/make-picasso-adt.py"
+          test -f "$ADT" || { echo "make-picasso-adt.py missing: $ADT"; exit 1; }
+          python3 - "$ADT" <<'PYEOF'
+import sys, pathlib
+p = pathlib.Path(sys.argv[1])
+s = p.read_text()
+old = "('picasso-unprotected-data' if args.persistent_data else 'ephemeral-storage', struct.pack('<I', 1))"
+new = "('ephemeral-storage', struct.pack('<I', 1))"
+if old in s:
+    s = s.replace(old, new, 1)
+    p.write_text(s)
+    print("patched ADT: persistent_data no longer overrides ephemeral-storage")
+elif "('ephemeral-storage', struct.pack('<I', 1))" in s:
+    print("ADT already uses unconditional ephemeral-storage; nothing to do")
+else:
+    print("ERROR: expected ADT property expression not found"); sys.exit(1)
+PYEOF
+          grep -n "ephemeral-storage" "$ADT" | head -n 5
+
       - name: Build kernel + payload
         env:
           GITHUB_TOKEN: ${{ github.token }}
