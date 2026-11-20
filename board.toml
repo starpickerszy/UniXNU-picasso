@@ -284,11 +284,6 @@ kernel_args = [
   "sheng-banner=0",
   # State queries only for unprotected developer Data; no keybag/key operations.
   "picasso-aks-state=1",
-  "sheng-data-persist=2",
-  "picasso-data-init-blank=1",
-  # One-time 20 GiB replacement; persistent journal prevents subsequent resets.
-  "picasso-data-replace-20g=1",
-  "picasso-persist-records=1",
   # Software refresh notifications only; panel timing remains firmware-owned.
   "sheng-vsync=60",
   # Virtual input: after HID and two frames are ready, wake at 5 s and swipe at 8 s.
@@ -316,9 +311,9 @@ owned_trust_library = "out/picasso/libpicasso-sb.dylib"
 [payload.adt]
 tool = "scripts/make-picasso-adt.py"
 chip_id = "7250"
-# Pass packed nonzero Data pages; persist changed pages in the guarded UFS Data window.
+# Pass packed nonzero Data pages in RAM; do not persist them to UFS (run #7 volatile Data).
 packed_data_ramdisk = true
-persistent_data = true
+persistent_data = false
 # Explicit unencrypted developer storage; does not claim keybag/password support.
 unprotected_developer_data = true
 # Use the original iPhone X identity and phone/2436/3/P3 artwork.
